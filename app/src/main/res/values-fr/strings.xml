@@ -4,7 +4,6 @@
     <string name="main_input_hint">Entrez l\'adresse gemini://</string>
     <string name="main_input_search_hint">Entrez un terme de recherche</string>
     <string name="copy_address">Partager l\'adresse</string>
-    <string name="load_image">Afficher en ligne</string>
     <string name="about">À propos</string>
     <string name="address_copied_to_clipboard">Adresse copiée dans le presse-papiers</string>
     <string name="gemini_address">Adresse Gemini</string>

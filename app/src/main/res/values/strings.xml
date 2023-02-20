@@ -4,7 +4,6 @@
     <string name="main_input_hint">Enter gemini:// address</string>
     <string name="main_input_search_hint">Enter search term</string>
     <string name="copy_address">Share address</string>
-    <string name="load_image">Display inline</string>
     <string name="about">About</string>
     <string name="address_copied_to_clipboard">Address copied to clipboard</string>
     <string name="gemini_address">Gemini address</string>
