@@ -89,7 +89,7 @@ class GemActivity : AppCompatActivity() {
 
     private var goingBack: Boolean = false
 
-    lateinit var adapter: AbstractGemtextAdapter
+    private lateinit var adapter: AbstractGemtextAdapter
 
     private lateinit var home: String
 
@@ -459,7 +459,7 @@ class GemActivity : AppCompatActivity() {
             }
 
             is GemState.Redirect -> {
-                omniTerm.set(proxiedAddress ?: state.uri.toString())
+                omniTerm.set(state.uri.toString())
                 gemRequest(omniTerm.getGlobalUri(state.header.meta))
             }
 
