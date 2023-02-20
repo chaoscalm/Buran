@@ -365,14 +365,13 @@ class SettingsFragment: PreferenceFragmentCompat(), Preference.OnPreferenceChang
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                type = "*/*"
+                type = "application/x-pkcs12"
             }
             startActivityForResult(intent, PREFS_SET_CLIENT_CERT_REQ)
             true
         }
 
         certificateCategory.addPreference(clientCertPref)
-
 
         val clientCertPassword = EditTextPreference(context)
         clientCertPassword.key = Buran.PREF_KEY_CLIENT_CERT_PASSWORD
@@ -398,7 +397,6 @@ class SettingsFragment: PreferenceFragmentCompat(), Preference.OnPreferenceChang
         useBiometrics.title = getString(R.string.biometric_cert_verification)
         useBiometrics.isVisible = false
         certificateCategory.addPreference(useBiometrics)
-
 
         val passwordCiphertext = EditTextPreference(context)
         passwordCiphertext.key = "password_ciphertext"
@@ -445,6 +443,7 @@ class SettingsFragment: PreferenceFragmentCompat(), Preference.OnPreferenceChang
                             clientCertPassword.summary = getDots(clientCertPassword.text)
                         }
                         clientCertPassword.isVisible = !(newValue as Boolean)
+                        clientCertPref.isEnabled = !(newValue as Boolean)
                     }
                 }
 
@@ -497,7 +496,6 @@ class SettingsFragment: PreferenceFragmentCompat(), Preference.OnPreferenceChang
                 persistPermissions(uri)
                 findFilename(uri)
            }
-
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
