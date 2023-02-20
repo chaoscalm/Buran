@@ -35,25 +35,26 @@ class OppenURI constructor(private var ouri: String) {
         }
     }
 
-    fun resolve(reference: String): String{
+    fun resolve(reference: String, persistent: Boolean): String{
         if(ouri == "$GEMSCHEME$host") ouri = "$ouri/"
+        var resolvedUri = ""
         when {
             reference.startsWith(GEMSCHEME) -> set(reference)
-            reference.startsWith(SOLIDUS) -> ouri = "$scheme://$host$reference"
+            reference.startsWith(SOLIDUS) -> resolvedUri = "$scheme://$host$reference"
             reference.startsWith(TRAVERSE) -> {
-                if(!ouri.endsWith(DIREND)) ouri = ouri.removeFile()
+                if(!ouri.endsWith(DIREND)) resolvedUri = ouri.removeFile()
                 val traversalCount = reference.split(TRAVERSE).size - 1
-                ouri = traverse(traversalCount) + reference.replace(TRAVERSE, "")
+                resolvedUri = traverse(traversalCount) + reference.replace(TRAVERSE, "")
             }
             reference.startsWith(QUERY) -> {
-                ouri = if(reference.contains(QUERY)){
+                resolvedUri = if(reference.contains(QUERY)){
                     ouri.substringBefore(QUERY) + reference
                 }else{
                     ouri + reference
                 }
             }
             else -> {
-                ouri = when {
+                resolvedUri = when {
                     ouri.endsWith(DIREND) -> {
                         "${ouri}$reference"
                     }
@@ -61,7 +62,14 @@ class OppenURI constructor(private var ouri: String) {
                 }
             }
         }
-        return ouri
+        if(persistent){
+            ouri = resolvedUri
+        }
+        return resolvedUri
+    }
+
+    fun resolve(reference: String): String{
+        return resolve(reference, true)
     }
 
     private fun traverse(count: Int): String{

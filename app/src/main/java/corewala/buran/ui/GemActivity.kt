@@ -747,6 +747,7 @@ class GemActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_TITLE, File(state.uri.path).name)
             startActivityForResult(intent, CREATE_IMAGE_FILE_REQ)
         }
+        omniTerm.set(omniTerm.goBack())
     }
 
     private fun renderBinary(state: GemState.ResponseBinary) = runOnUiThread{

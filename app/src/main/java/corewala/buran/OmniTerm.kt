@@ -73,7 +73,7 @@ class OmniTerm(private val listener: Listener) {
         return when {
             reference.contains(":") -> reference
             reference.startsWith("//") -> "gemini:$reference"
-            else -> uri.resolve(reference)
+            else -> uri.resolve(reference, false)
         }
     }
 
