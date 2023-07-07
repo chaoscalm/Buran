@@ -3,6 +3,7 @@ package corewala.buran
 import corewala.toURI
 
 const val GEMSCHEME = "gemini://"
+const val PART_TRAVERSE = ".."
 const val TRAVERSE = "../"
 const val SOLIDUS = "/"
 const val DIREND = "/"
@@ -41,10 +42,14 @@ class OppenURI constructor(private var ouri: String) {
         when {
             reference.startsWith(GEMSCHEME) -> set(reference)
             reference.startsWith(SOLIDUS) -> resolvedUri = "$scheme://$host$reference"
-            reference.startsWith(TRAVERSE) -> {
-                if(!ouri.endsWith(DIREND)) resolvedUri = ouri.removeFile()
-                val traversalCount = reference.split(TRAVERSE).size - 1
-                resolvedUri = traverse(traversalCount) + reference.replace(TRAVERSE, "")
+            reference.startsWith(PART_TRAVERSE) -> {
+		val fixedReference = if (reference == PART_TRAVERSE) "$reference/" else reference
+                if (!ouri.endsWith(DIREND)) {
+                    resolvedUri = ouri.removeFile()
+                } else {
+                    val traversalCount = fixedReference.split(TRAVERSE).size - 1
+                    resolvedUri = traverse(traversalCount) + fixedReference.replace(TRAVERSE, "")
+                }
             }
             reference.startsWith(QUERY) -> {
                 resolvedUri = if(reference.contains(QUERY)){
