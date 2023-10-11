@@ -29,7 +29,11 @@ Buran is a simple Gemini protocol browser for Android.
 - [X] Attention guide mode
 - [ ] Simple A/B page switching system
 - [ ] Pass [Egsam test](https://github.com/pitr/egsam)
-- [X] Option to define an HTTPS gateway 
+- [X] Option to define an HTTPS gateway
+
+## Build your own updated app      
+
+Latest Android Studio doesn't support the old Java version used here, the simplest way for you to build this updated app from source will be to download an older Android Studio release, from here: https://developer.android.com/studio/archive?hl=en such as Android Studio Bumblebee | 2021.1.1 January 25, 2022
 
 ## Credits
 
